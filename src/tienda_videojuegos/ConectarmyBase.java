@@ -108,7 +108,7 @@ public class ConectarmyBase {
         return listaJuegos;
     }
 
-    public void update(String codigo) {
+    public void modify(String codigo) {
         connect();
         try {
 
