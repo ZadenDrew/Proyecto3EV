@@ -1,8 +1,14 @@
-package tienda_videojuegos;
+package grafica;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
+import baseDatos.ConectarmyBase;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+import javax.swing.JOptionPane;
+import tienda_videojuegos.Juegos;
+import tienda_videojuegos.Ticket;
 
 /**
  *
@@ -12,7 +18,8 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
     ConectarmyBase link = new ConectarmyBase();
     DefaultTableModel model;
-    Object codigoRecogido, nombreRecogido;
+    Object codigoRecogido, nombreRecogido,precioRecogido;
+    Tabla_Ticket tk = new Tabla_Ticket();
     /**
      * Creates new form Tabla_Juego
      */
@@ -46,6 +53,8 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         nombre = new javax.swing.JTextField();
         consola = new javax.swing.JTextField();
@@ -91,8 +100,8 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButton5.setBackground(new java.awt.Color(204, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Refresh_132187.png")); // NOI18N
-        jButton5.setText("Show&Update");
+        jButton5.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Refresh_132187.png")); // NOI18N
+        jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -101,7 +110,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.add(jButton5);
 
         jButton3.setBackground(new java.awt.Color(204, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Edit_132232.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Edit_132232.png")); // NOI18N
         jButton3.setText("Modify");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +120,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(204, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Save_132226.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Save_as_132230.png")); // NOI18N
         jButton4.setText("Insert");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +130,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.add(jButton4);
 
         jButton7.setBackground(new java.awt.Color(204, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Delete_132192.png")); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Delete_132192.png")); // NOI18N
         jButton7.setText("Delete");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,25 +140,45 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.add(jButton7);
 
         jButton1.setBackground(new java.awt.Color(204, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Search_132289.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Search_132289.png")); // NOI18N
         jButton1.setText("Search");
         jButton1.setMaximumSize(new java.awt.Dimension(119, 36));
         jButton1.setPreferredSize(new java.awt.Dimension(119, 36));
         jToolBar1.add(jButton1);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/codigo-qr.png")); // NOI18N
+        jButton9.setBackground(new java.awt.Color(204, 255, 255));
+        jButton9.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Euro_132272.png")); // NOI18N
+        jButton9.setText("Venta");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton9);
+
+        jButton2.setBackground(new java.awt.Color(204, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Price_list_132262.png")); // NOI18N
+        jButton2.setText("Ticket");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/codigo-qr.png")); // NOI18N
         jLabel3.setText("Código");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/texto.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/texto.png")); // NOI18N
         jLabel1.setText("Nombre");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/consola-de-juegos.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/consola-de-juegos.png")); // NOI18N
         jLabel2.setText("Consola");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/if_Coins_132337.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/if_Coins_132337.png")); // NOI18N
         jLabel4.setText("Precio");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/imagenes/archivo-num-simbolo-de-interfaz-rectangular-negro.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/src/imagenes/archivo-num-simbolo-de-interfaz-rectangular-negro.png")); // NOI18N
         jLabel5.setText("Unidades");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,14 +238,14 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(229, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,22 +254,20 @@ public class Tabla_Juego extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -257,6 +284,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
         for (int i = 0; i < tabla.getRowCount(); i++) {
             tabla.removeRow(i);
             i -= 1;
@@ -282,6 +310,8 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         codigoRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        precioRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+      
 //        int i = jTable1.getSelectedRow();
 //
 //        codigo.setText(model.getValueAt(i, 0).toString());
@@ -290,6 +320,17 @@ public class Tabla_Juego extends javax.swing.JFrame {
 //        precio.setText(model.getValueAt(i, 3).toString());
 //        unidades.setText(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        tk.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // link.insertaTicket(String.valueOf(codigoRecogido));
+        
+        int uni = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
+       // Ticket nuevo = new Ticket(num,precioRecogido,uni);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,10 +371,12 @@ public class Tabla_Juego extends javax.swing.JFrame {
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField consola;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

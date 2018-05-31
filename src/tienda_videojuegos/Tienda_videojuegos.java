@@ -1,6 +1,8 @@
 
 package tienda_videojuegos;
 
+import grafica.Tabla_Juego;
+
 /**
  *
  * @author andrea

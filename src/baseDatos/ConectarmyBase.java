@@ -1,4 +1,4 @@
-package tienda_videojuegos;
+package baseDatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.DataSource;
 import javax.swing.JOptionPane;
+import tienda_videojuegos.Juegos;
 
 /**
  *
@@ -59,12 +60,13 @@ public class ConectarmyBase {
             if (stmt != null) {
                 stmt.close();
             }
+            System.out.println("aaaaaaaaaa");
             if (link != null) {
                 link.close();
             }
             System.out.println("Conexión cerrada.");
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
+           } catch (SQLException ex) {
+            System.out.println("Error: aaaaaaaa" + ex);
         }
     }
 
