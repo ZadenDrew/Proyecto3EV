@@ -353,11 +353,17 @@ public class Tabla_Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        int totalUni;
         int vent = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
-        System.out.println(Ticket.getNum());
-        bt.insertaTicket(new Ticket(Ticket.getNum(), Float.valueOf(String.valueOf(precioRecogido)), vent));
-        System.out.println(Ticket.getNum());
-        link.venta(String.valueOf(codigoRecogido), vent);
+        int unimenos = Integer.parseInt(String.valueOf(Tabla_Juego.jTable1.getValueAt(jTable1.getSelectedRow(), 4)));
+        if (unimenos < vent) {
+            JOptionPane.showMessageDialog(null, "Imposible realizar venta.No hay suficientes unidades");
+        } else {
+            totalUni = unimenos - vent;
+            bt.insertaTicket(new Ticket(bt.ultimoNum(bt.mostrarTickets()), Float.valueOf(String.valueOf(precioRecogido)), vent));
+
+            link.venta(String.valueOf(codigoRecogido), totalUni);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

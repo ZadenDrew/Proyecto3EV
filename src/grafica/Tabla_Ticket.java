@@ -132,11 +132,11 @@ public class Tabla_Ticket extends javax.swing.JFrame {
         ArrayList ticket = bt.mostrarTickets();
         Iterator it = ticket.iterator();
         while (it.hasNext()) {
-            Ticket tks= (Ticket) it.next();
+            Ticket tks = (Ticket) it.next();
             String[] col = new String[5];
-            col[0] = String.valueOf(Ticket.getNum());
+            col[0] = String.valueOf(tks.getNum());
             col[1] = String.valueOf(tks.getPrecio());
-            col[2] =String.valueOf(tks.getUnidades());      
+            col[2] = String.valueOf(tks.getUnidades());
             tablat.addRow(col);
             jTable1.setModel(tablat);
         }

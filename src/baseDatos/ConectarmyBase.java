@@ -134,8 +134,7 @@ public class ConectarmyBase {
     public void venta(String codigo,int unidades) {
         connect();
         try {
-
-            stmt = link.prepareStatement("UPDATE Juegos set nombre = unidades = '" + unidades + "' where codigo='" + codigo + "';");
+            stmt = link.prepareStatement("UPDATE Juegos set unidades = '" + unidades + "' where codigo='" + codigo + "';");
             stmt.executeUpdate();
             link.commit();
 

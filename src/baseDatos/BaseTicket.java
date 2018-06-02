@@ -26,7 +26,7 @@ public class BaseTicket {
         try {
 
             PreparedStatement st = cb.link.prepareStatement("insert into Ticket values (?,?,?)");
-            st.setInt(1, Ticket.getNum());
+            st.setInt(1, tk.getNum());
             st.setFloat(2, tk.getPrecio());
             st.setInt(3, tk.getUnidades());
 
@@ -56,5 +56,22 @@ public class BaseTicket {
         }
         cb.disconnect();
         return listaTickets;
+    }
+
+    public int ultimoNum(ArrayList<Ticket> listaTickets) {
+        int ultimo = 0;
+        for (int i = 0; i < listaTickets.size(); i++) {
+            listaTickets.get(i).getNum();
+            if ((i + 1) == listaTickets.size()) {
+                break;
+            }
+            if (listaTickets.get(i).getNum() > listaTickets.get(i + 1).getNum()) {
+                ultimo = listaTickets.get(i).getNum();
+            } else {
+                ultimo = listaTickets.get(i + 1).getNum();
+            }
+
+        }
+        return ultimo;
     }
 }
