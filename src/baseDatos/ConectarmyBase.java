@@ -27,6 +27,7 @@ public class ConectarmyBase {
 //    public String pass = "012345C";
     public Connection link;
     public PreparedStatement stmt;
+    public ArrayList<Juegos> listaJuegos = new ArrayList();
 
     public ConectarmyBase() {
 
@@ -38,7 +39,7 @@ public class ConectarmyBase {
 
             Class.forName("org.sqlite.JDBC");
 
-            link = DriverManager.getConnection("jdbc:sqlite:/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/mibase.db");
+            link = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\andrea\\Documents\\NetBeansProjects\\tienda_videojuegos\\mibase.db");
             link.setAutoCommit(false);
             if (link != null) {
                 System.out.println("Conectado.");
@@ -65,7 +66,7 @@ public class ConectarmyBase {
                 link.close();
             }
             System.out.println("Conexión cerrada.");
-           } catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Error: aaaaaaaa" + ex);
         }
     }
@@ -147,4 +148,39 @@ public class ConectarmyBase {
         }
         disconnect();
     }
+
+    public Juegos buscar(String s, int op) {
+
+        connect();
+        ResultSet result;
+        String busca = null;
+        Juegos usu = null;
+        try {
+
+            Statement st = link.createStatement();
+            if (op == 1) {
+                busca = "SELECT * from JUEGOS where codigo='" + s + "';";
+            }
+
+            if (op == 2) {
+                busca = "SELECT * from JUEGOS where nombre='" + s + "';";
+            }
+
+            result = st.executeQuery(busca);
+            while (result.next()) {
+                usu = new Juegos(result.getString("codigo"), result.getString("nombre"),
+                        result.getString("consola"), result.getFloat("precio"), result.getInt("unidades"));
+                link.commit();
+
+                System.out.println("Filas encontrada con éxito.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+
+        disconnect();
+        return usu;
+    }
+     
+
 }
