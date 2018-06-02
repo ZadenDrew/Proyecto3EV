@@ -35,6 +35,14 @@ public class Ticket {
         this.unidades = unidades;
     }
 
+    public static int getNum() {
+        return num;
+    }
+
+    public static void setNum(int num) {
+        Ticket.num = num;
+    }
+
     @Override
     public String toString() {
         return ("Ticket -> \n" + " unidades=" + unidades + "\tprecio=" + precio + "\ntotal=" + precio * unidades);

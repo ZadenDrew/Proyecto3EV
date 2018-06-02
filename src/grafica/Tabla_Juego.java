@@ -1,11 +1,10 @@
 package grafica;
 
+import baseDatos.BaseTicket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import baseDatos.ConectarmyBase;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 import javax.swing.JOptionPane;
 import tienda_videojuegos.Juegos;
 import tienda_videojuegos.Ticket;
@@ -17,6 +16,7 @@ import tienda_videojuegos.Ticket;
 public class Tabla_Juego extends javax.swing.JFrame {
 
     ConectarmyBase link = new ConectarmyBase();
+    BaseTicket bt = new BaseTicket();
     DefaultTableModel model;
     Object codigoRecogido, nombreRecogido, precioRecogido;
     Tabla_Ticket tk = new Tabla_Ticket();
@@ -155,6 +155,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
 
         jButton6.setBackground(new java.awt.Color(204, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
         jButton6.setText("Show");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,7 +337,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         codigoRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        precioRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        precioRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 3);
 
 //        int i = jTable1.getSelectedRow();
 //
@@ -352,10 +353,11 @@ public class Tabla_Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // link.insertaTicket(String.valueOf(codigoRecogido));
-
-        int uni = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
-        // Ticket nuevo = new Ticket(num,precioRecogido,uni);
+        int vent = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
+        System.out.println(Ticket.getNum());
+        bt.insertaTicket(new Ticket(Ticket.getNum(), Float.valueOf(String.valueOf(precioRecogido)), vent));
+        System.out.println(Ticket.getNum());
+        link.venta(String.valueOf(codigoRecogido), vent);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

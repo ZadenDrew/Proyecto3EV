@@ -131,6 +131,21 @@ public class ConectarmyBase {
         disconnect();
     }
 
+    public void venta(String codigo,int unidades) {
+        connect();
+        try {
+
+            stmt = link.prepareStatement("UPDATE Juegos set nombre = unidades = '" + unidades + "' where codigo='" + codigo + "';");
+            stmt.executeUpdate();
+            link.commit();
+
+            System.out.println("La venta ha sido realizada con éxito.");
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+        disconnect();
+    }
+
     public void delete(String codigo) {
         connect();
 
@@ -181,6 +196,5 @@ public class ConectarmyBase {
         disconnect();
         return usu;
     }
-     
 
 }
