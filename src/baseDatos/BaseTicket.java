@@ -26,7 +26,7 @@ public class BaseTicket {
         try {
 
             PreparedStatement st = cb.link.prepareStatement("insert into Ticket values (?,?,?)");
-            st.setInt(1, tk.getNum());
+            st.setInt(1, calcularNum() + 1);
             st.setFloat(2, tk.getPrecio());
             st.setInt(3, tk.getUnidades());
             st.execute();
@@ -57,20 +57,41 @@ public class BaseTicket {
         return listaTickets;
     }
 
-//    public int ultimoNum(ArrayList<Ticket> listaTickets) {
-//        int ultimo = 0;
-//        for (int i = 0; i < listaTickets.size(); i++) {
-//            listaTickets.get(i).getNum();
-//            if ((i + 1) == listaTickets.size()) {
-//                break;
-//            }
-//            if (listaTickets.get(i).getNum() > listaTickets.get(i + 1).getNum()) {
-//                ultimo = listaTickets.get(i).getNum();
-//            } else {
-//                ultimo = listaTickets.get(i + 1).getNum();
-//            }
-//
-//        }
-//        return ultimo;
-//    }
+    public int ultimoNum(ArrayList<Ticket> listaTickets) {
+        int ultimo = 0;
+        for (int i = 0; i < listaTickets.size(); i++) {
+            listaTickets.get(i).getNum();
+            if ((i + 1) == listaTickets.size()) {
+                break;
+            }
+            if (listaTickets.get(i).getNum() > listaTickets.get(i + 1).getNum()) {
+                ultimo = listaTickets.get(i).getNum();
+            } else {
+                ultimo = listaTickets.get(i + 1).getNum();
+            }
+
+        }
+        return ultimo;
+    }
+
+    public int calcularNum() {
+        int num = 0;
+        cb.connect();
+        ResultSet result = null;
+        try {
+            PreparedStatement st = cb.link.prepareStatement("select max(num) as num from Ticket");
+
+            result = st.executeQuery();
+            if (result.next()) {
+                num = result.getInt("num") + 1;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error ");
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        cb.disconnect();
+        return num;
+    }
+
 }

@@ -11,16 +11,15 @@ public class Ticket {
     private int num;
     private float precio;
     private int unidades;
-    private static int snum = 0;
-    BaseTicket bt2 = new BaseTicket();
 
     public Ticket() {
     }
 
     public Ticket(int num, float precio, int unidades) {
+        this.num = num;
         this.precio = precio;
         this.unidades = unidades;
-        this.num = snum + 1;
+
     }
 
     public float getPrecio() {
