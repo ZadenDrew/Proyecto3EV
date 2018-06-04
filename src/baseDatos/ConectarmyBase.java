@@ -39,7 +39,7 @@ public class ConectarmyBase {
 
             Class.forName("org.sqlite.JDBC");
 
-            link = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\andrea\\Documents\\NetBeansProjects\\tienda_videojuegos\\mibase.db");
+            link = DriverManager.getConnection("jdbc:sqlite:/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/mibase.db");
             link.setAutoCommit(false);
             if (link != null) {
                 System.out.println("Conectado.");

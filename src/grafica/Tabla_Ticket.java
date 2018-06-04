@@ -28,6 +28,10 @@ public class Tabla_Ticket extends javax.swing.JFrame {
      */
     public Tabla_Ticket() {
         initComponents();
+        tablat.addColumn("num");
+        tablat.addColumn("precio");
+        tablat.addColumn("unidades");    
+        jTable1.setModel(tablat);
     }
 
     /**
@@ -106,9 +110,9 @@ public class Tabla_Ticket extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -116,7 +120,7 @@ public class Tabla_Ticket extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(133, 133, 133))))
         );
@@ -133,7 +137,7 @@ public class Tabla_Ticket extends javax.swing.JFrame {
         Iterator it = ticket.iterator();
         while (it.hasNext()) {
             Ticket tks = (Ticket) it.next();
-            String[] col = new String[5];
+            String[] col = new String[3];
             col[0] = String.valueOf(tks.getNum());
             col[1] = String.valueOf(tks.getPrecio());
             col[2] = String.valueOf(tks.getUnidades());

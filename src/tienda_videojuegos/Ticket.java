@@ -8,9 +8,10 @@ import baseDatos.BaseTicket;
  */
 public class Ticket {
 
+    private int num;
     private float precio;
     private int unidades;
-    private int num = 0;
+    private static int snum = 0;
     BaseTicket bt2 = new BaseTicket();
 
     public Ticket() {
@@ -19,7 +20,7 @@ public class Ticket {
     public Ticket(int num, float precio, int unidades) {
         this.precio = precio;
         this.unidades = unidades;
-        this.num = bt2.ultimoNum(bt2.mostrarTickets()) + 1;
+        this.num = snum + 1;
     }
 
     public float getPrecio() {
@@ -48,7 +49,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return ("Ticket -> \n" + " unidades=" + unidades + "\tprecio=" + precio + "\ntotal=" + precio * unidades);
+        return ("Ticket -> \n" + " nº =" + num + " unidades=" + unidades + "\tprecio=" + precio + "\ntotal=" + precio * unidades);
     }
 
 }
