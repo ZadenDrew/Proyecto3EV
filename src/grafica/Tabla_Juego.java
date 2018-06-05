@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import baseDatos.ConectarmyBase;
+import java.awt.Color;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
+import sonido.Sonido;
 import tienda_videojuegos.Juegos;
 import tienda_videojuegos.Ticket;
 
@@ -16,6 +18,7 @@ import tienda_videojuegos.Ticket;
  */
 public class Tabla_Juego extends javax.swing.JFrame {
 
+    Sonido musica = new Sonido();
     ConectarmyBase link = new ConectarmyBase();
     BaseTicket bt = new BaseTicket();
     DefaultTableModel model;
@@ -51,18 +54,19 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
+        modify = new javax.swing.JButton();
+        insert = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        search = new javax.swing.JButton();
+        show = new javax.swing.JButton();
+        venta = new javax.swing.JButton();
+        ticket = new javax.swing.JButton();
+        music = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        codigo = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         consola = new javax.swing.JTextField();
-        codigo = new javax.swing.JTextField();
         precio = new javax.swing.JTextField();
         unidades = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -76,6 +80,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(900, 900));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,87 +110,131 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton5.setBackground(new java.awt.Color(204, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Refresh_132187.png"))); // NOI18N
-        jButton5.setText("Refresh");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        refresh.setBackground(new java.awt.Color(204, 255, 255));
+        refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Refresh_132187.png"))); // NOI18N
+        refresh.setText("Refresh");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                refreshActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(refresh);
 
-        jButton3.setBackground(new java.awt.Color(204, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Save_as_132230.png"))); // NOI18N
-        jButton3.setText("Modify");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        modify.setBackground(new java.awt.Color(204, 255, 255));
+        modify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Save_as_132230.png"))); // NOI18N
+        modify.setText("Modify");
+        modify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                modifyActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton3);
+        jToolBar1.add(modify);
 
-        jButton4.setBackground(new java.awt.Color(204, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Edit_132232.png"))); // NOI18N
-        jButton4.setText("Insert");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        insert.setBackground(new java.awt.Color(204, 255, 255));
+        insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Edit_132232.png"))); // NOI18N
+        insert.setText("Insert");
+        insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                insertActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton4);
+        jToolBar1.add(insert);
 
-        jButton7.setBackground(new java.awt.Color(204, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Delete_132192.png"))); // NOI18N
-        jButton7.setText("Delete");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        delete.setBackground(new java.awt.Color(204, 255, 255));
+        delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Delete_132192.png"))); // NOI18N
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                deleteActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton7);
+        jToolBar1.add(delete);
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Search_132289.png"))); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setMaximumSize(new java.awt.Dimension(119, 36));
-        jButton1.setPreferredSize(new java.awt.Dimension(119, 36));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(204, 255, 255));
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Search_132289.png"))); // NOI18N
+        search.setText("Search");
+        search.setMaximumSize(new java.awt.Dimension(119, 36));
+        search.setPreferredSize(new java.awt.Dimension(119, 36));
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(search);
 
-        jButton6.setBackground(new java.awt.Color(204, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
-        jButton6.setText("Show");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        show.setBackground(new java.awt.Color(204, 255, 255));
+        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
+        show.setText("Show");
+        show.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                showActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(show);
 
-        jButton9.setBackground(new java.awt.Color(204, 255, 255));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Euro_132272.png"))); // NOI18N
-        jButton9.setText("Venta");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        venta.setBackground(new java.awt.Color(204, 255, 255));
+        venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Euro_132272.png"))); // NOI18N
+        venta.setText("Sell");
+        venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                ventaActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton9);
+        jToolBar1.add(venta);
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Price_list_132262.png"))); // NOI18N
-        jButton2.setText("Ticket");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ticket.setBackground(new java.awt.Color(204, 255, 255));
+        ticket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Price_list_132262.png"))); // NOI18N
+        ticket.setText("Ticket");
+        ticket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ticketActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(ticket);
+
+        music.setBackground(new java.awt.Color(204, 255, 255));
+        music.setText("Musica");
+        music.setFocusable(false);
+        music.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        music.setMaximumSize(new java.awt.Dimension(76, 36));
+        music.setMinimumSize(new java.awt.Dimension(76, 36));
+        music.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        music.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                musicActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(music);
+
+        codigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                codigoMouseClicked(evt);
+            }
+        });
+
+        nombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nombreMouseClicked(evt);
+            }
+        });
+
+        consola.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                consolaMouseClicked(evt);
+            }
+        });
+
+        precio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                precioMouseClicked(evt);
+            }
+        });
+
+        unidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                unidadesMouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Código");
 
@@ -216,10 +265,10 @@ public class Tabla_Juego extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(consola, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                                .addComponent(codigo)
+                                .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                .addComponent(consola)
                                 .addComponent(precio)))
                         .addGap(22, 22, 22))))
         );
@@ -228,15 +277,15 @@ public class Tabla_Juego extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,35 +307,31 @@ public class Tabla_Juego extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,23 +342,41 @@ public class Tabla_Juego extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Juegos nuevo = new Juegos(nombre.getText(), consola.getText(), codigo.getText(), Float.parseFloat(precio.getText()), Integer.parseInt(unidades.getText()));
-        link.insert(nuevo);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
+        if (consola.getText().isEmpty() || codigo.getText().isEmpty() || nombre.getText().isEmpty() || precio.getText().isEmpty() || unidades.getText().isEmpty()) {
+            if (consola.getText().isEmpty()) {
+                consola.setBackground(Color.RED);
+            }
+            if (codigo.getText().isEmpty()) {
+                codigo.setBackground(Color.RED);
+            }
+            if (nombre.getText().isEmpty()) {
+                nombre.setBackground(Color.RED);
+            }
+            if (precio.getText().isEmpty()) {
+                precio.setBackground(Color.RED);
+            }
+            if (unidades.getText().isEmpty()) {
+                unidades.setBackground(Color.RED);
+            }
+        } else {
+            Juegos nuevo = new Juegos(codigo.getText(), nombre.getText(), consola.getText(), Float.parseFloat(precio.getText()), Integer.parseInt(unidades.getText()));
+            link.insert(nuevo);
+        }
+    }//GEN-LAST:event_insertActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyActionPerformed
         link.modify(String.valueOf(codigoRecogido));
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_modifyActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
             tabla.removeRow(i);
@@ -332,11 +395,11 @@ public class Tabla_Juego extends javax.swing.JFrame {
             tabla.addRow(col);
             jTable1.setModel(tabla);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_refreshActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         link.delete(String.valueOf(codigoRecogido));
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_deleteActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         codigoRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
@@ -351,14 +414,13 @@ public class Tabla_Juego extends javax.swing.JFrame {
 //        unidades.setText(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
         tk.setVisible(true);
         it = bt.mostrarTickets().listIterator();
         tk.jTextArea1.setText(String.valueOf(it.next()));
-       
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ticketActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         int totalUni;
         int vent = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
         int unimenos = Integer.parseInt(String.valueOf(Tabla_Juego.jTable1.getValueAt(jTable1.getSelectedRow(), 4)));
@@ -366,13 +428,14 @@ public class Tabla_Juego extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Imposible realizar venta.No hay suficientes unidades");
         } else {
             totalUni = unimenos - vent;
+
             bt.insertaTicket(new Ticket(bt.calcularNum(), Float.valueOf(String.valueOf(precioRecogido)), vent));
 
             link.venta(String.valueOf(codigoRecogido), totalUni);
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_ventaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         int i = Integer.parseInt(JOptionPane.showInputDialog("** MENU **\n1)BUSCAR POR CODIGO\n2)BUSCAR POR NOMBRE"));
         String s;
         switch (i) {
@@ -385,12 +448,40 @@ public class Tabla_Juego extends javax.swing.JFrame {
                 jTextArea1.setText(s);
                 break;
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_searchActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String t = link.buscar(String.valueOf(codigoRecogido), 1).toString();
-        jTextArea1.setText(t);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
+        if (codigoRecogido == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione un valor de la tabla");
+        } else {
+            String t = link.buscar(String.valueOf(codigoRecogido), 1).toString();
+            jTextArea1.setText(t);
+        }
+    }//GEN-LAST:event_showActionPerformed
+
+    private void codigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_codigoMouseClicked
+        codigo.setBackground(Color.WHITE);
+    }//GEN-LAST:event_codigoMouseClicked
+
+    private void nombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreMouseClicked
+        nombre.setBackground(Color.WHITE);
+    }//GEN-LAST:event_nombreMouseClicked
+
+    private void consolaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consolaMouseClicked
+        consola.setBackground(Color.WHITE);
+    }//GEN-LAST:event_consolaMouseClicked
+
+    private void precioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioMouseClicked
+        precio.setBackground(Color.WHITE);
+    }//GEN-LAST:event_precioMouseClicked
+
+    private void unidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unidadesMouseClicked
+        unidades.setBackground(Color.WHITE);
+    }//GEN-LAST:event_unidadesMouseClicked
+
+    private void musicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicActionPerformed
+        musica.ReproducirSonido();
+    }//GEN-LAST:event_musicActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,14 +521,8 @@ public class Tabla_Juego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField consola;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton insert;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -450,8 +535,15 @@ public class Tabla_Juego extends javax.swing.JFrame {
     public static javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton modify;
+    private javax.swing.JButton music;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
+    private javax.swing.JButton refresh;
+    private javax.swing.JButton search;
+    private javax.swing.JButton show;
+    private javax.swing.JButton ticket;
     private javax.swing.JTextField unidades;
+    private javax.swing.JButton venta;
     // End of variables declaration//GEN-END:variables
 }

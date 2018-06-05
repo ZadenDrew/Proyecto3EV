@@ -22,7 +22,7 @@ public class ConectarmyBase {
 
     public DataSource dataSource;
     public String db = "mibase.db";
-    public String url = "jdbc:sqlite:/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/" + db;
+    public String url = "jdbc:sqlite:C:\\Users\\estudios\\Desktop\\BaseDatosSQLite\\basePro.db";
 //    public String user = "AndreaBase";
 //    public String pass = "012345C";
     public Connection link;
@@ -39,8 +39,8 @@ public class ConectarmyBase {
 
             Class.forName("org.sqlite.JDBC");
 
-            link = DriverManager.getConnection("jdbc:sqlite:/home/local/DANIELCASTELAO/acabezaslopez/NetBeansProjects/tienda_videojuegos/mibase.db");
-            link.setAutoCommit(false);
+            link = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\estudios\\Desktop\\BaseDatosSQLite\\basePro.db");
+
             if (link != null) {
                 System.out.println("Conectado.");
             }
@@ -58,13 +58,19 @@ public class ConectarmyBase {
 
     public void disconnect() {
         try {
+            
             if (stmt != null) {
-                stmt.close();
+                stmt.closeOnCompletion();
+                
             }
             if (link != null) {
+                
                 link.close();
             }
+           
             System.out.println("Conexión cerrada.");
+            
+            
         } catch (SQLException ex) {
             System.out.println("Error:" + ex);
         }
@@ -74,7 +80,7 @@ public class ConectarmyBase {
         connect();
 
         try {
-
+            
             PreparedStatement st = link.prepareStatement("insert into Juegos values (?,?,?,?,?)");
             st.setString(1, j.getCodigo());
             st.setString(2, j.getNombre());
@@ -84,30 +90,36 @@ public class ConectarmyBase {
             st.execute();
             link.commit();
         } catch (SQLException ex) {
-            Logger.getLogger(ConectarmyBase.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Ese codigo ya esta repetido");
         }
         disconnect();
         this.mostrarJuegos();
     }
 
     public ArrayList mostrarJuegos() {
-        ArrayList<Juegos> listaJuegos = new ArrayList();
+        listaJuegos = new ArrayList();
         connect();
         ResultSet result;
         try {
+            
             PreparedStatement st = link.prepareStatement("SELECT * FROM Juegos");
+            
             result = st.executeQuery();
+            
             while (result.next()) {
                 Juegos usu = new Juegos(result.getString("codigo"), result.getString("nombre"),
                         result.getString("consola"), result.getFloat("precio"), result.getInt("unidades"));
                 listaJuegos.add(usu);
             }
+            
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
+        
         disconnect();
+        
         return listaJuegos;
+        
     }
 
     public void modify(String codigo) {
@@ -119,9 +131,8 @@ public class ConectarmyBase {
             String precio = JOptionPane.showInputDialog("dame el precio:");
             String unidades = JOptionPane.showInputDialog("dame las unidades:");
             stmt = link.prepareStatement("UPDATE Juegos set nombre = '" + nombre + "' , consola = '" + consola + "' ,precio = '" + precio + "',unidades = '" + unidades + "' where codigo='" + codigo + "';");
-
             stmt.executeUpdate();
-            link.commit();
+            
 
             System.out.println("La fila ha sido modificada con éxito.");
         } catch (SQLException ex) {
@@ -135,7 +146,7 @@ public class ConectarmyBase {
         try {
             stmt = link.prepareStatement("UPDATE Juegos set unidades = '" + unidades + "' where codigo='" + codigo + "';");
             stmt.executeUpdate();
-            link.commit();
+            //link.commit();
 
             System.out.println("La venta ha sido realizada con éxito.");
         } catch (SQLException ex) {

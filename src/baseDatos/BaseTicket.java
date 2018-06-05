@@ -21,7 +21,7 @@ public class BaseTicket {
 
     public void insertaTicket(Ticket tk) {
         cb.connect();
-
+        
         try {
 
             PreparedStatement st = cb.link.prepareStatement("insert into Ticket values (?,?,?)");
@@ -29,7 +29,7 @@ public class BaseTicket {
             st.setFloat(2, tk.getPrecio());
             st.setInt(3, tk.getUnidades());
             st.execute();
-            cb.link.commit();
+            
         } catch (SQLException ex) {
             Logger.getLogger(ConectarmyBase.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(ex.getMessage());
@@ -59,6 +59,7 @@ public class BaseTicket {
     public int calcularNum() {
         int num = 0;
         ResultSet result = null;
+        cb.connect();
         try {
             PreparedStatement st = cb.link.prepareStatement("select max(num) as num from Ticket");
             result = st.executeQuery();
@@ -70,6 +71,7 @@ public class BaseTicket {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        cb.disconnect();
         return num;
     }
 
