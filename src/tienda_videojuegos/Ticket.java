@@ -48,7 +48,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return ("Ticket -> \n" + " nº =" + num + " unidades=" + unidades + "\tprecio=" + precio + "\ntotal=" + precio * unidades);
+        return ("Ticket  nº " + num + " -> \nunidades=" + unidades + "\nprecio=" + precio + "\ntotal=" + precio * unidades);
     }
 
 }

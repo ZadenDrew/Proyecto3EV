@@ -189,7 +189,7 @@ public class ConectarmyBase {
                 System.out.println("Filas encontrada con éxito.");
             }
         } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
+  JOptionPane.showMessageDialog(null,"Seleccione un juego en la tabla a mostrar .");
         }
 
         disconnect();

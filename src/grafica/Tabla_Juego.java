@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import baseDatos.ConectarmyBase;
+import java.util.ListIterator;
 import javax.swing.JOptionPane;
 import tienda_videojuegos.Juegos;
 import tienda_videojuegos.Ticket;
@@ -21,6 +22,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
     Object codigoRecogido, nombreRecogido, precioRecogido;
     Tabla_Ticket tk = new Tabla_Ticket();
     Ticket t = new Ticket();
+    static ListIterator it;
     /**
      * Creates new form Tabla_Juego
      */
@@ -351,6 +353,9 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         tk.setVisible(true);
+        it = bt.mostrarTickets().listIterator();
+        tk.jTextArea1.setText(String.valueOf(it.next()));
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
