@@ -61,13 +61,12 @@ public class ConectarmyBase {
             if (stmt != null) {
                 stmt.close();
             }
-            System.out.println("aaaaaaaaaa");
             if (link != null) {
                 link.close();
             }
             System.out.println("Conexión cerrada.");
         } catch (SQLException ex) {
-            System.out.println("Error: aaaaaaaa" + ex);
+            System.out.println("Error:" + ex);
         }
     }
 
@@ -131,7 +130,7 @@ public class ConectarmyBase {
         disconnect();
     }
 
-    public void venta(String codigo,int unidades) {
+    public void venta(String codigo, int unidades) {
         connect();
         try {
             stmt = link.prepareStatement("UPDATE Juegos set unidades = '" + unidades + "' where codigo='" + codigo + "';");
@@ -189,7 +188,7 @@ public class ConectarmyBase {
                 System.out.println("Filas encontrada con éxito.");
             }
         } catch (SQLException ex) {
-  JOptionPane.showMessageDialog(null,"Seleccione un juego en la tabla a mostrar .");
+            JOptionPane.showMessageDialog(null, "Seleccione un juego en la tabla a mostrar .");
         }
 
         disconnect();
