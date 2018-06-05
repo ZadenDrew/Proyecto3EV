@@ -361,7 +361,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Imposible realizar venta.No hay suficientes unidades");
         } else {
             totalUni = unimenos - vent;
-            bt.insertaTicket(new Ticket(t.getNum(), Float.valueOf(String.valueOf(precioRecogido)), vent));
+            bt.insertaTicket(new Ticket(bt.calcularNum(), Float.valueOf(String.valueOf(precioRecogido)), vent));
 
             link.venta(String.valueOf(codigoRecogido), totalUni);
         }
