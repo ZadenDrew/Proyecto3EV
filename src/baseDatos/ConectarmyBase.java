@@ -22,7 +22,7 @@ public class ConectarmyBase {
 
     public DataSource dataSource;
     public String db = "mibase.db";
-    public String url = "jdbc:sqlite:C:\\Users\\estudios\\Desktop\\BaseDatosSQLite\\basePro.db";
+    public String url = "jdbc:sqlite:/home/oracle/NetBeansProjects/tienda_videojuegos/" + db;
 //    public String user = "AndreaBase";
 //    public String pass = "012345C";
     public Connection link;
@@ -39,7 +39,7 @@ public class ConectarmyBase {
 
             Class.forName("org.sqlite.JDBC");
 
-            link = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\estudios\\Desktop\\BaseDatosSQLite\\basePro.db");
+            link = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\andrea\\Documents\\NetBeansProjects\\tienda_videojuegos\\mibase.db");
 
             if (link != null) {
                 System.out.println("Conectado.");
@@ -58,19 +58,18 @@ public class ConectarmyBase {
 
     public void disconnect() {
         try {
-            
+
             if (stmt != null) {
                 stmt.closeOnCompletion();
-                
+
             }
             if (link != null) {
-                
+
                 link.close();
             }
-           
+
             System.out.println("Conexión cerrada.");
-            
-            
+
         } catch (SQLException ex) {
             System.out.println("Error:" + ex);
         }
@@ -80,7 +79,7 @@ public class ConectarmyBase {
         connect();
 
         try {
-            
+
             PreparedStatement st = link.prepareStatement("insert into Juegos values (?,?,?,?,?)");
             st.setString(1, j.getCodigo());
             st.setString(2, j.getNombre());
@@ -101,25 +100,25 @@ public class ConectarmyBase {
         connect();
         ResultSet result;
         try {
-            
+
             PreparedStatement st = link.prepareStatement("SELECT * FROM Juegos");
-            
+
             result = st.executeQuery();
-            
+
             while (result.next()) {
                 Juegos usu = new Juegos(result.getString("codigo"), result.getString("nombre"),
                         result.getString("consola"), result.getFloat("precio"), result.getInt("unidades"));
                 listaJuegos.add(usu);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         disconnect();
-        
+
         return listaJuegos;
-        
+
     }
 
     public void modify(String codigo) {
@@ -132,7 +131,6 @@ public class ConectarmyBase {
             String unidades = JOptionPane.showInputDialog("dame las unidades:");
             stmt = link.prepareStatement("UPDATE Juegos set nombre = '" + nombre + "' , consola = '" + consola + "' ,precio = '" + precio + "',unidades = '" + unidades + "' where codigo='" + codigo + "';");
             stmt.executeUpdate();
-            
 
             System.out.println("La fila ha sido modificada con éxito.");
         } catch (SQLException ex) {

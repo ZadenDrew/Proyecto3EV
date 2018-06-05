@@ -92,6 +92,7 @@ public class Tabla_Ticket extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         jButton3.setBackground(new java.awt.Color(204, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/if_Database_132199.png"))); // NOI18N
         jButton3.setText("Refresh");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +115,7 @@ public class Tabla_Ticket extends javax.swing.JFrame {
                     .addComponent(jScrollPane1))
                 .addGap(44, 44, 44)
                 .addComponent(jButton3)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +127,7 @@ public class Tabla_Ticket extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(133, 133, 133))
                     .addGroup(layout.createSequentialGroup()
