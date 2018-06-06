@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.DataSource;
 import javax.swing.JOptionPane;
 import tienda_videojuegos.Juegos;
