@@ -48,7 +48,7 @@ public class Tabla_Juego extends javax.swing.JFrame {
         tabla.addColumn("precio");
         tabla.addColumn("unidades");
         jTable1.setModel(tabla);
-        noticia = Noticias.pasarNoticia();
+        
         jLabel6.setText(noticia);
 
     }

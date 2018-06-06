@@ -24,7 +24,7 @@ public class Sonido {
     public void ReproducirSonido() {
         if(repro==false){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\estudios\\Documents\\NetBeansProjects\\sonido\\marcianito.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\estudios\\Documents\\NetBeansProjects\\Proyecto3EV2\\src\\sonido\\Marcianito 100% real bailando cumbia.wmv.wav").getAbsoluteFile());
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
