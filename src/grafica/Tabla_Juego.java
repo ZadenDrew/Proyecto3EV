@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import baseDatos.ConectarmyBase;
+import com.mycompany.tiempo_exm.Tiempo;
 import java.awt.Color;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -39,6 +40,10 @@ public class Tabla_Juego extends javax.swing.JFrame {
         tabla.addColumn("precio");
         tabla.addColumn("unidades");
         jTable1.setModel(tabla);
+        Tiempo t = new Tiempo();
+        t.titulo();
+        t.grados();
+        t.tiempo();
     }
 
     /**
