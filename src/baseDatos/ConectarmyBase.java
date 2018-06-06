@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.DataSource;
 import javax.swing.JOptionPane;
 import tienda_videojuegos.Juegos;
@@ -89,7 +87,7 @@ public class ConectarmyBase {
             st.execute();
             link.commit();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ese codigo ya esta repetido");
+           // JOptionPane.showMessageDialog(null, "Ese codigo ya esta repetido");
         }
         disconnect();
         this.mostrarJuegos();
