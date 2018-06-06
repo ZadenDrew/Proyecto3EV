@@ -26,11 +26,15 @@ public class ConectarmyBase {
     public Connection link;
     public PreparedStatement stmt;
     public ArrayList<Juegos> listaJuegos = new ArrayList();
-
+/**
+ * Constructor por defecto de ConectarmyBase
+ */
     public ConectarmyBase() {
 
     }
-
+/**
+ * Método para conectarse a la base de datos
+ */
     public void connect() {
 
         try {
@@ -53,7 +57,9 @@ public class ConectarmyBase {
         }
 
     }
-
+/**
+ * Método para desconectar de la base de datos
+ */
     public void disconnect() {
         try {
 
@@ -72,7 +78,10 @@ public class ConectarmyBase {
             System.out.println("Error:" + ex);
         }
     }
-
+/**
+ * Método que inserta en la base de datos de Juegos los valores obtenidos mediante el parámetro Juegos que se le pasa
+ * @param  j 
+ */
     public void insert(Juegos j) {
         connect();
 
@@ -92,7 +101,10 @@ public class ConectarmyBase {
         disconnect();
         this.mostrarJuegos();
     }
-
+/**
+ * Método que recoge todos los datos de la base de datos de Juegos los mete en un ArrayList y los devuelve.
+ * @return ArrayList de Juegos
+ */
     public ArrayList mostrarJuegos() {
         listaJuegos = new ArrayList();
         connect();
@@ -112,13 +124,14 @@ public class ConectarmyBase {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
         disconnect();
-
         return listaJuegos;
 
     }
-
+/**
+ * Método que modifica una fila seleccionada Requiriendo los nuevos valores mediante unos JOptionPane.
+ * @param codigo 
+ */
     public void modify(String codigo) {
         connect();
         try {
@@ -136,7 +149,11 @@ public class ConectarmyBase {
         }
         disconnect();
     }
-
+/**
+ * Método que actualiza la base de datos de Juegos y Tickets trás una venta
+ * @param codigo
+ * @param unidades 
+ */
     public void venta(String codigo, int unidades) {
         connect();
         try {
@@ -150,7 +167,11 @@ public class ConectarmyBase {
         }
         disconnect();
     }
-
+/**
+ * Método que se conecta a la base de datos de Juegos y hace una  consulta en la tabla por código
+ * y elimina de la base de datos la fila correspondiente.
+ * @param codigo 
+ */
     public void delete(String codigo) {
         connect();
 
@@ -168,7 +189,14 @@ public class ConectarmyBase {
         }
         disconnect();
     }
-
+/**
+ * Método que se conecta a la base de datos de Juegos y hace una  consulta empleando Query con los valores 
+ * requeridos. Con los valores encontrados instanciamos un objeto de la clase Juegos que retornaremos.
+ * 
+ * @param s
+ * @param op
+ * @return Juegos
+ */
     public Juegos buscar(String s, int op) {
 
         connect();

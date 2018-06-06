@@ -8,7 +8,11 @@ import org.jsoup.Jsoup;
  * @author acabezaslopez
  */
 public class Noticias {
-
+/**
+ * Método estatico que devuelve un String con unos valores de una noticia de una página web.
+ * Para conectar le pasamos a connect la URL de la web a consultar
+ * @return String noticia
+ */
     public static String pasarNoticia() {
         String noticia = null;
         try {

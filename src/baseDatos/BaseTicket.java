@@ -18,7 +18,10 @@ public class BaseTicket {
 
     public BaseTicket() {
     }
-
+/**
+ * Método que se conecta a la base de datos de Ticket e inserta en la misma los valores dados
+ * @param tk 
+ */
     public void insertaTicket(Ticket tk) {
         cb.connect();
         
@@ -37,7 +40,10 @@ public class BaseTicket {
         cb.disconnect();
         this.mostrarTickets();
     }
-
+/**
+ * Método que se conecta a la base de datos de Ticket y devuelve los valores consultados con Query
+ * @return ArrayList listaTickets 
+ */
     public ArrayList mostrarTickets() {
         ArrayList<Ticket> listaTickets = new ArrayList();
         cb.connect();
@@ -55,7 +61,11 @@ public class BaseTicket {
         cb.disconnect();
         return listaTickets;
     }
-
+/**
+ * Método que se conecta a la base de datos de Ticket y mediante una consulta Query selecciona el último campo num 
+ * guardado correspondiente con la clave primaria de la base Ticket y nos lo devuelve.
+ * @return int num
+ */    
     public int calcularNum() {
         int num = 0;
         ResultSet result = null;

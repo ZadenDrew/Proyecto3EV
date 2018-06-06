@@ -13,7 +13,6 @@ import tienda_videojuegos.Ticket;
  */
 public class Tabla_Ticket extends javax.swing.JFrame {
 
-    //ConectarmyBase cb = new ConectarmyBase();
     BaseTicket bt = new BaseTicket();
     DefaultTableModel tablat = new DefaultTableModel();
 
@@ -138,7 +137,11 @@ public class Tabla_Ticket extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Evento que recorre la tabla Ticket y recoge los valores en un ArrayList para luego añadir un nuevo valor .
+ * Por último rellenamos la tabla de nuevo con todos los valores.
+ * @param evt 
+ */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         for (int i = 0; i < tablat.getRowCount(); i++) {
             tablat.removeRow(i);
@@ -156,12 +159,18 @@ public class Tabla_Ticket extends javax.swing.JFrame {
             jTable1.setModel(tablat);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
+/**
+ * Evento que hace recorer un ArrayList de Ticket hacía delante
+ * @param evt 
+ */
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
       
         jTextArea1.setText(String.valueOf(it.next()));
     }//GEN-LAST:event_jButton1MouseClicked
-
+/**
+ * Evento que hace recorer un ArrayList de Ticket hacía atrás
+ * @param evt 
+ */
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
 
         jTextArea1.setText(String.valueOf(it.previous()));
@@ -170,7 +179,6 @@ public class Tabla_Ticket extends javax.swing.JFrame {
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
        
-        
     }//GEN-LAST:event_jButton1MouseEntered
 
     /**

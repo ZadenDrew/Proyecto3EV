@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sonido;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
@@ -21,6 +16,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Sonido {
     boolean repro=false;
     Clip clip;
+/**
+ * Método que reproduce un archivo de audio
+ */   
     public void ReproducirSonido() {
         if(repro==false){
         try {

@@ -35,10 +35,12 @@ public class Tabla_Juego extends javax.swing.JFrame {
     static ListIterator it;
     String noticia;
     Desktop enlace = Desktop.getDesktop();
+    DefaultTableModel tabla = new DefaultTableModel();
+    
     /**
      * Creates new form Tabla_Juego
      */
-    DefaultTableModel tabla = new DefaultTableModel();
+
 
     public Tabla_Juego() {
         initComponents();
@@ -384,7 +386,12 @@ public class Tabla_Juego extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Evento que comprueba si los campos de nuestros jTextFields están rellenos y si no ,en los campos vacíos
+ * colorea el fondo de rojo para resaltar que faltan. Sí están todos completos se instancia un objeto de la clase Juegos
+ * y se llama al método insert de ConectarmyBase para que lo inserte en la base de datos de Juegos.
+ * @param evt 
+ */
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
         if (consola.getText().isEmpty() || codigo.getText().isEmpty() || nombre.getText().isEmpty() || precio.getText().isEmpty() || unidades.getText().isEmpty()) {
             if (consola.getText().isEmpty()) {
@@ -407,12 +414,21 @@ public class Tabla_Juego extends javax.swing.JFrame {
             link.insert(nuevo);
         }
     }//GEN-LAST:event_insertActionPerformed
-
+ /**
+  * Evento que con un codigorecogido por un mousecliked llama al método modify de ConectarmyBase 
+  * @param evt
+  */   
     private void modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyActionPerformed
         link.modify(String.valueOf(codigoRecogido));
 
     }//GEN-LAST:event_modifyActionPerformed
-
+/**
+ * Evento que recorre la tabla Juegos y recoge los valores en un ArrayList
+ * para luego añadir un nuevo valor . Por último rellenamos la tabla de
+ * nuevo con todos los valores.
+ *
+ * @param evt
+ */
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
@@ -433,23 +449,40 @@ public class Tabla_Juego extends javax.swing.JFrame {
             jTable1.setModel(tabla);
         }
     }//GEN-LAST:event_refreshActionPerformed
-
+/**
+ * Evento que con un codigorecogido por un mousecliked llama al método delete de ConectarmyBase 
+ * @param evt
+ */
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         link.delete(String.valueOf(codigoRecogido));
     }//GEN-LAST:event_deleteActionPerformed
-
+/**
+ * Evento que obtiene codigorecogido y preciorecogido como objetos, de la tabla  por un mousecliked 
+ * @param evt
+ */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         codigoRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 0);
         precioRecogido = jTable1.getValueAt(jTable1.getSelectedRow(), 3);
 
     }//GEN-LAST:event_jTable1MouseClicked
-
+/**
+ * Evento que hace visible Tabla_Ticket. Mediante una llamada al método mostrarTickets( que devuelve un ArrayList 
+ * de Tickets )y un Iterator recorremos el ArrayList y lo mostramos en un TextArea
+ * @param evt
+ */
     private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
         tk.setVisible(true);
         it = bt.mostrarTickets().listIterator();
         tk.jTextArea1.setText(String.valueOf(it.next()));
     }//GEN-LAST:event_ticketActionPerformed
-
+/**
+ * Evento que resta de una fila seleccionada en la tabla previamente las unidades vendidas y nos 
+ * alerta en caso de no poder realizar la venta .Posteriormente se instancia un objeto de la clase  Ticket y 
+ * mediante una llamada al método insertarTicket se añade a la base de datos de Ticket.
+ * Por último se le pasan como parámetros al Método venta de ConectarmyBase el codigorecogido y las unidades 
+ * que quedan trás la venta.
+ * @param evt
+ */
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         int totalUni;
         int vent = Integer.parseInt(JOptionPane.showInputDialog("Unidades vendidas :????"));
@@ -464,7 +497,11 @@ public class Tabla_Juego extends javax.swing.JFrame {
             link.venta(String.valueOf(codigoRecogido), totalUni);
         }
     }//GEN-LAST:event_ventaActionPerformed
-
+/**
+ * Evento que muestra un menú para saber con que valor queremos hacer la consulta y con el mismo llama al método
+ * buscar de la clase ConctarmyBase . El String devuelto por este método se muestra en un TextArea.
+ * @param evt
+ */
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         int i = Integer.parseInt(JOptionPane.showInputDialog("** MENU **\n1)BUSCAR POR CODIGO\n2)BUSCAR POR NOMBRE"));
         String s;
@@ -479,7 +516,10 @@ public class Tabla_Juego extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_searchActionPerformed
-
+/**
+ *
+ * @param evt
+ */
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
         if (codigoRecogido == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un valor de la tabla");
@@ -488,31 +528,53 @@ public class Tabla_Juego extends javax.swing.JFrame {
             jTextArea1.setText(t);
         }
     }//GEN-LAST:event_showActionPerformed
-
+/**
+ * Evento para restablecer fondo en blanco del campo codigo en caso de tenerlo en rojo, y así poder escribir en el.
+ * @param evt
+ */
     private void codigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_codigoMouseClicked
         codigo.setBackground(Color.WHITE);
     }//GEN-LAST:event_codigoMouseClicked
-
+/**
+ * Evento para restablecer fondo en blanco del campo nombre en caso de tenerlo en rojo, y así poder escribir en el.
+ * @param evt
+ */
     private void nombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreMouseClicked
         nombre.setBackground(Color.WHITE);
     }//GEN-LAST:event_nombreMouseClicked
-
+/**
+ * Evento para restablecer fondo en blanco del campo consola en caso de tenerlo en rojo, y así poder escribir en el.
+ * @param evt
+ */
     private void consolaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consolaMouseClicked
         consola.setBackground(Color.WHITE);
     }//GEN-LAST:event_consolaMouseClicked
-
+/**
+ * Evento para restablecer fondo en blanco del campo precio en caso de tenerlo en rojo, y así poder escribir en el.
+ * @param evt
+ */
     private void precioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioMouseClicked
         precio.setBackground(Color.WHITE);
     }//GEN-LAST:event_precioMouseClicked
-
+/**
+ * Evento para restablecer fondo en blanco del campo unidades en caso de tenerlo en rojo, y así poder escribir en el.
+ * @param evt
+ */
     private void unidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unidadesMouseClicked
         unidades.setBackground(Color.WHITE);
     }//GEN-LAST:event_unidadesMouseClicked
-
+/**
+ * Evento que llama al método ReproducirSonido mediante un objeto música 
+ * @param evt
+ */
     private void musicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicActionPerformed
         musica.ReproducirSonido();
     }//GEN-LAST:event_musicActionPerformed
-
+/**
+ * Evento que mediante un objeto Desktop con el método browse y dada una URL enlaza con 
+ * una página de noticias de videojuegos
+ * @param evt
+ */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // Noticias t = new Noticias();
